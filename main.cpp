@@ -1,5 +1,7 @@
 #include "hnulib.h"
 #include <iostream>
+#include <cstdlib>
+#include <cstring>
 using namespace std;
 
 int main(){
@@ -9,6 +11,7 @@ int main(){
     user *users_head=loading_users(users_num,books_head);
     menu main;
     int i,sign=1;
+    string tmp;
     while(sign){
         system("cls");
         i=main.show_menu_main();
@@ -45,8 +48,41 @@ int main(){
                     case 0:     //返回上级菜单
                     system("cls");
                     break;
-                    case 1:     //查找图书
-                            //需要图书查找目录
+                    case 1: 
+                    book_menu:    //查找图书
+                        i=main.show_menu_books();
+                        switch (i){
+                        case 0:
+                            system("cls");
+                            break;
+                        case 1:
+                            system("cls");
+                            cout<<"请输入ISBN号：";
+                            cin>>tmp;
+                            books_head->lookup_isbn(tmp,books_head);
+                            break;
+                        case 2:
+                            system("cls");
+                            cout<<"请输入书名：";
+                            cin>>tmp;
+                            books_head->lookup_name(tmp,books_head);
+                            break;
+                        case 3:
+                            system("cls");
+                            cout<<"请输入作者名：";
+                            cin>>tmp;
+                            books_head->lookup_author(tmp,books_head);
+                            break;
+                        case 4:
+                            system("cls");
+                            cout<<"请输入出版社名：";
+                            cin>>tmp;
+                            books_head->lookup_publishing(tmp,books_head);
+                            break;
+                        default:
+                            cout<<"您的输入有误，请重试"<<endl;
+                            goto book_menu;
+                        }    
                     case 2:     //查看图书借阅排行榜
                         system("cls");
                         books_head->book_list(books_head);
@@ -65,7 +101,6 @@ int main(){
 
                 }
             case 3:     //学生模式
-
                         //需要登录目录
 
                 menu_user:
@@ -76,7 +111,40 @@ int main(){
                         system("cls");
                         break;
                     case 1:     //查书
-                            //需要查书目录
+                    book_menu2:    //查找图书
+                        i=main.show_menu_books();
+                        switch (i){
+                        case 0:
+                            system("cls");
+                            break;
+                        case 1:
+                            system("cls");
+                            cout<<"请输入ISBN号：";
+                            cin>>tmp;
+                            books_head->lookup_isbn(tmp,books_head);
+                            break;
+                        case 2:
+                            system("cls");
+                            cout<<"请输入书名：";
+                            cin>>tmp;
+                            books_head->lookup_name(tmp,books_head);
+                            break;
+                        case 3:
+                            system("cls");
+                            cout<<"请输入作者名：";
+                            cin>>tmp;
+                            books_head->lookup_author(tmp,books_head);
+                            break;
+                        case 4:
+                            system("cls");
+                            cout<<"请输入出版社名：";
+                            cin>>tmp;
+                            books_head->lookup_publishing(tmp,books_head);
+                            break;
+                        default:
+                            cout<<"您的输入有误，请重试"<<endl;
+                            goto book_menu2;
+                        }    
                     case 2:     //还书
                         system("cls");
                         users_head->b_r(2,users_head,books_head);
@@ -85,19 +153,23 @@ int main(){
                         system("cls");
                         users_head->b_r(1,users_head,books_head);
                         break;
-                    case 4:     //查看借阅记录
+                    case 4:
+                        system("cls");
+                        users_head->change_key(users_head);
+                        break;
+                    case 5:     //查看借阅记录
                         system("cls");
                         users_head->show_borrow(users_head,books_head);
                         break;
-                    case 5:     //查看图书借阅排行榜
+                    case 6:     //查看图书借阅排行榜
                         system("cls");
                         books_head->book_list(books_head);
                         break;
-                    case 6:     //作者借阅排行榜
+                    case 7:     //作者借阅排行榜
                         system("cls");
                         books_head->author_list(books_head);
                         break;
-                    case 7:     //出版时间排行榜
+                    case 8:     //出版时间排行榜
                         system("cls");
                         books_head->new_publish(books_head);
                         break;

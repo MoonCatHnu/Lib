@@ -97,9 +97,32 @@ void user::show_borrow(user *user_head,books *book_head)
     return;
 }
 
-void user::b_r(int n,user *user_head,books *book)   //这个部分的编写跟目录结构有点关系，等目录出来大概是要改
+void user::b_r(int n,user *user_head,books *book_head)   //这个部分的编写跟目录结构有点关系，等目录出来大概是要改
 {
     user *temp=user_head;
+    cout<<"请先登录"<<'\n';
+    user *temp=user::login(user_head);
+    books* tmp;
+    
+    int i;
+    string isbn;
+    string bo_name;
+    books* book;
+ag:
+    cout<<"请查找图书 输入1-按ISBN查找图书 2-按书名查找图书 0-退出"<<'\n';
+    switch (i)
+    {
+    case 1:
+        book=tmp->lookup_isbn(isbn,book_head);
+        break;
+    case 2:
+        book=tmp->lookup_name(bo_name,book_head);
+    case 0:
+        return ;
+    default:
+        cout<<"输入错误"<<endl;
+        goto ag;
+    }
     if(n==1)    //借书
     {
         if(book->borrow==false&&temp->log_num<=20)

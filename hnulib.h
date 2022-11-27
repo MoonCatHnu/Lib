@@ -89,6 +89,7 @@ class menu{
     int show_menu_admin(); //管理员目录
     int show_menu_user();  //使用者目录
     int show_menu_tourist();  //游客目录
+    int show_menu_books();  //查找图书
 };
 class tourist{  //游客（待开发）
 
