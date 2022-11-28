@@ -20,17 +20,34 @@ struct books* loading_books(int &num){
     else{
         ifs.close();    //重新打开文件；
         ifs.open("books.txt",ios::in); //此处及以下文件路径需要改动
-        
+        int id; //图书id
+        string isbn;    //图书isdn，较长
+        string name;   //图书名，有中文
+        string author; //作者名
+        string publishing; //出版社名字
+        string published;   //出版日期
+        double price;   //图书价格，含小数
+        int pages;  //图书页数
+        string description;    //图书描述
+        long int b_num;   //图书被借阅次数
         books *end=head;
-        books *node=new books;
-        while(ifs>>node->id&&ifs>>node->isbn&&ifs>>node->name&&ifs>>node->author&&ifs>>node->publishing&&ifs>>node->published&&ifs>>node->price&&ifs>>node->pages&&ifs>>node->description&&ifs>>node->b_num){
-            node->borrow=false; //这是没写存数据部分是吗----//这里是是否被借阅
+        while(ifs>>id&&ifs>>isbn&&ifs>>name&&ifs>>author&&ifs>>publishing&&ifs>>published&&ifs>>price&&ifs>>pages&&ifs>>description&&ifs>>b_num){
+            books *node=new books;
+            node->id=id;
+            node->isbn=isbn;
+            node->name=name;
+            node->author=author;
+            node->publishing=publishing;
+            node->published=published;
+            node->price=price;
+            node->pages=pages;
+            node->description=description;
+            node->b_num=b_num;
+            node->borrow=false; 
             end->next=node;
             end=end->next;
-            books *node=new books;
             num++;
         }
-        delete node;
         end->next=NULL;
         ifs.close();
     }
@@ -54,16 +71,16 @@ struct admin* loading_admin(int &num){
     else{
         ifs.close();    //重新打开文件；
         ifs.open("admin.txt",ios::in); //此处及以下文件路径需要改动
-        
+        string account_num,key;
         admin *end=head;
-        admin *node=new admin;
-        while(ifs>>node->account_num&&ifs>>node->key){
+        while(ifs>>account_num&&ifs>>key){
+            admin *node=new admin;
+            node->account_num=account_num;
+            node->key=key;
             end->next=node;
             end=end->next;
-            books *node=new books;
             num++;
         }
-        delete node;
         end->next=NULL;
         ifs.close();
     }
@@ -87,26 +104,26 @@ struct user* loading_users(int &num,books *head_books){ //用户需要录入借�
     else{
         ifs.close();    //重新打开文件；
         ifs.open("books.txt",ios::in); //此处及以下文件路径需要改动
-        
+        string account_num,key;
+        int log_num;
         user *end=head;
-        user *node=new user;
-        while(ifs>>node->account_num&&ifs>>node->key&&ifs>>node->log_num){
-            if(node->log_num!=0){
-                for(int i=0;i<node->log_num;i++){
+        while(ifs>>account_num&&ifs>>key&&ifs>>log_num){
+            user *node=new user;
+            if(log_num!=0){
+                for(int i=0;i<log_num;i++){
                     ifs>>node->log[i];
                     for(books *h=head_books->next;h!=NULL;h=h->next){
                         if(node->log[i]==h->id){
                             h->borrow=true;
+                            break;
                         }
                     }
                 }
             }
             end->next=node;
             end=end->next;
-            books *node=new books;
             num++;
         }
-        delete node;
         end->next=NULL;
         ifs.close();
     }
