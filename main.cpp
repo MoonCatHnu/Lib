@@ -12,6 +12,8 @@ int main(){
     menu main;
     int i,sign=1;
     string tmp;
+    user *us_tmp=NULL;
+    admin *ad_tmp=NULL;
     while(sign){
         system("cls");
         i=main.show_menu_main();
@@ -82,27 +84,38 @@ int main(){
                         default:
                             cout<<"您的输入有误，请重试"<<endl;
                             goto book_menu;
-                        }    
+                        }
+                        goto menu_tourist;    
                     case 2:     //查看图书借阅排行榜
                         system("cls");
                         books_head->book_list(books_head);
-                        break;
+                        goto menu_tourist;
                     case 3:     //查看作者借阅排行榜
                         system("cls");
                         books_head->author_list(books_head);
-                        break;
+                        goto menu_tourist;
                     case 4:     //查看最新出版书籍
                         system("cls");
                         books_head->new_publish(books_head);
-                        break;
+                        goto menu_tourist;
                     default:
                         cout<<"您的输入有误，请重试"<<endl;
                         goto menu_tourist;
 
                 }
             case 3:     //学生模式
-                        //需要登录目录
-
+            us_re_lo:
+                cout<<"亲爱的同学，欢迎使用图书馆信息管理系统，请先登录以使用后续功能！"<<endl;    
+                us_tmp=users_head->login(users_head);
+                if(us_tmp==NULL)
+                {
+                    cout<<"0-重新登录 1-返回上级目录"<<endl;
+                    cin>>i;
+                    if(i)
+                    break;
+                    else
+                    goto us_re_lo;
+                }
                 menu_user:
                 system("cls");
                 i=main.show_menu_user();
@@ -144,34 +157,60 @@ int main(){
                         default:
                             cout<<"您的输入有误，请重试"<<endl;
                             goto book_menu2;
-                        }    
+                        }
+                        goto menu_user;    
                     case 2:     //还书
                         system("cls");
-                        users_head->b_r(2,users_head,books_head);
-                        break;
+                        if(us_tmp==NULL)
+                        {
+                            cout<<"请先登录"<<endl;
+                            goto us_re_lo;
+                        }
+                        users_head->b_r(2,us_tmp,books_head);
+                        goto menu_user;
                     case 3:     //借书
                         system("cls");
-                        users_head->b_r(1,users_head,books_head);
-                        break;
+                        if(us_tmp==NULL)
+                        {
+                            cout<<"请先登录"<<endl;
+                            goto us_re_lo;
+                        }
+                        users_head->b_r(1,us_tmp,books_head);
+                        goto menu_user;
                     case 4:
                         system("cls");
-                        users_head->change_key(users_head);
-                        break;
+                        if(us_tmp==NULL)
+                        {
+                            cout<<"请先登录"<<endl;
+                            goto us_re_lo;
+                        }
+                        users_head->change_key(us_tmp);
+                        goto menu_user;
                     case 5:     //查看借阅记录
                         system("cls");
-                        users_head->show_borrow(users_head,books_head);
-                        break;
+                        if(us_tmp==NULL)
+                        {
+                            cout<<"请先登录"<<endl;
+                            goto us_re_lo;
+                        }
+                        users_head->show_borrow(us_tmp,books_head);
+                        goto menu_user;
                     case 6:     //查看图书借阅排行榜
                         system("cls");
                         books_head->book_list(books_head);
-                        break;
+                        goto menu_user;
                     case 7:     //作者借阅排行榜
                         system("cls");
                         books_head->author_list(books_head);
-                        break;
+                        goto menu_user;
                     case 8:     //出版时间排行榜
                         system("cls");
                         books_head->new_publish(books_head);
+                        goto menu_user;
+                    case 9:
+                        system("cls");
+                        us_tmp=NULL;
+                        cout<<"您已退出登录"<<endl;
                         break;
                     default:
                         cout<<"您的输入有误，请重试"<<endl;
@@ -179,7 +218,10 @@ int main(){
                 }
             case 4:     //管理员模式
 
-                            //需要登录目录
+                cout<<"亲爱的管理员，欢迎使用图书馆信息管理系统，请先登录以使用后续功能！"<<endl;
+                ad_tmp=admins_head->login(admins_head);
+                if(ad_tmp==NULL)
+                break;
 
                 menu_admin:
                 system("cls");
@@ -191,18 +233,23 @@ int main(){
                     case 1:     //追加图书
                         system("cls");
                         admins_head->add_book(books_head);
-                        break;
+                        goto menu_admin;
                     case 2:     //删除图书
                         system("cls");
                         admins_head->del_book(books_head);
-                        break;
+                        goto menu_admin;
                     case 3:     //更改图书
                         system("cls");
                         admins_head->change_book(books_head);
-                        break;
+                        goto menu_admin;
                     case 4:     //重置学生密码
                         system("cls");
                         admins_head->reset_key(users_head);
+                        goto menu_admin;
+                    case 5:
+                        system("cls");
+                        ad_tmp=NULL;
+                        cout<<"您已退出登录"<<endl;
                         break;
                     default:
                         cout<<"您的输入有误，请重试"<<endl;

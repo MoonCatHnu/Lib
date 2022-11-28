@@ -4,6 +4,7 @@ using namespace std;
 
 user* user::login(user *user_head) //登陆
 {
+    system("cls");
     cout<<"请输入账号：";
     string account;
     cin>>account;
@@ -42,8 +43,7 @@ user* user::login(user *user_head) //登陆
 
 void user::change_key(user *user_head)  //改密码
 {
-    cout<<"请先登录"<<'\n';
-    user *temp=user::login(user_head);  //先登着
+    user *temp=user_head;  
     if(!temp)
     {
         return ;
@@ -76,9 +76,8 @@ void user::change_key(user *user_head)  //改密码
 
 void user::show_borrow(user *user_head,books *book_head)
 {
-    cout<<"请先登录"<<'\n';
-    user *temp=user::login(user_head);
-    //好吧，这样让用户操作确实很麻烦(少女折寿中)
+    user *temp=user_head;
+    
     cout<<"你借过"<<temp->log_num<<"本书"<<'\n';
     cout<<"分别是：";
     for(int i=0;i<log_num;i++)
@@ -99,9 +98,8 @@ void user::show_borrow(user *user_head,books *book_head)
 
 void user::b_r(int n,user *user_head,books *book_head)   //这个部分的编写跟目录结构有点关系，等目录出来大概是要改
 {
+    
     user *temp=user_head;
-    cout<<"请先登录"<<'\n';
-    user *temp=user::login(user_head);
     books* tmp;
     
     int i;
