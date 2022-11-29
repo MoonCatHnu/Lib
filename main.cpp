@@ -52,7 +52,8 @@ int main(){
                     system("cls");
                     break;
                     case 1:
-                    book_menu:    //查找图书
+                        book_menu:    //查找图书
+                        system("cls");
                         i=main.show_menu_books();
                         switch (i){
                         case 0:
@@ -107,7 +108,9 @@ int main(){
                 break;
             case 3:     //学生模式
             us_re_lo:
+                system("cls");
                 cout<<"亲爱的同学，欢迎使用图书馆信息管理系统，请先登录以使用后续功能！"<<endl;
+                system("pause");
                 us_tmp=users_head->login(users_head);
                 if(us_tmp==NULL)
                 {

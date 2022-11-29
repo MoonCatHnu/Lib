@@ -172,9 +172,9 @@ void admin::change_book(books *books_head){
                 break;
             case 7:
                 cout<<"请输入页数：";
-                int tt;
-                cin>>tt;
-                cout<<"确定以“"<<tt<<"”为本书的页数吗？ 输入0以确认，输入其他数字以取消：";
+                int ttt;
+                cin>>ttt;
+                cout<<"确定以“"<<ttt<<"”为本书的页数吗？ 输入0以确认，输入其他数字以取消：";
                 cin>>t;
                 if(t){
                     goto last_step;
@@ -197,9 +197,9 @@ void admin::change_book(books *books_head){
                 break;
             case 9:
                 cout<<"请输入被借阅次数：";
-                int tt;
-                cin>>tt;
-                cout<<"确定以“"<<tt<<"”为本书的被借阅次数吗？ 输入0以确认，输入其他数字以取消：";
+                int tttt;
+                cin>>tttt;
+                cout<<"确定以“"<<tttt<<"”为本书的被借阅次数吗？ 输入0以确认，输入其他数字以取消：";
                 cin>>t;
                 if(t){
                     goto last_step;
@@ -279,7 +279,7 @@ void admin::del_book(books *books_head){
 }
 
 void admin::reset_key(user *users_head){
-    
+
     string str;
     in_ag:
     cout<<"请输入要重置的账号：";

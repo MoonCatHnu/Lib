@@ -17,13 +17,14 @@ books* books::lookup_name(string name,books *book_head)   //书名精确查找
             cout<<"本书已被借阅"<<'\n';
             else
             cout<<"本书可借阅"<<'\n';
-
+            system("pause");
             return temp;
         }
         else
         temp=temp->next;
     }
     cout<<"未查找到相关书籍，请检查输入是否正确"<<'\n';
+    system("pause");
     return NULL;
 }
 
@@ -40,13 +41,14 @@ books* books::lookup_isbn(string isbn,books *book_head)   //ISBN精确查找
             cout<<"本书已被借阅"<<'\n';
             else
             cout<<"本书可借阅"<<'\n';
-
+            system("pause");
             return temp;
         }
         else
         temp=temp->next;
     }
     cout<<"未查找到相关书籍，请检查输入是否正确"<<'\n';
+    system("pause");
     return NULL;
 }
 //接下来应该是两个模糊查找
@@ -69,8 +71,11 @@ void books::lookup_author(string author,books *book_head)
         else
         temp=temp->next;
     }
-    if(!finding)
+    if(!finding){
     cout<<"未查找到相关书籍，请检查输入是否正确或向管理员反应书籍缺失"<<'\n';
+    system("pause");
+    }
+    system("pause");
     return ;
 }
 
@@ -93,18 +98,21 @@ void books::lookup_publishing(string publishing,books *book_head)
         else
         temp=temp->next;
     }
-    if(!finding)
+    if(!finding){
     cout<<"未查找到相关书籍，请检查输入是否正确或向管理员反应书籍缺失"<<'\n';
-    return;
+    system("pause");
+    }
+    system("pause");
+    return ;
 }
 
 books* books::dictionary_list(books* books_head){
     books *tmp_head=new books;  //深拷贝一份链表
     books *tmp_end=tmp_head;
-    books *node=new books;
     books *tmp=books_head->next;
     int count=0;
     while(tmp!=NULL){
+        books *node=new books;
         node->id=tmp->id;
         node->isbn=tmp->isbn;
         node->name=tmp->name;
@@ -117,14 +125,10 @@ books* books::dictionary_list(books* books_head){
         node->b_num=tmp->b_num;
         node->borrow=tmp->borrow;
         tmp=tmp->next;
-        tmp_end=node;
         tmp_end->next=node;
         tmp_end=tmp_end->next;
-        books *node=new books;
         count++;
     }
-    delete node;
-    count-=1;
     tmp_end->next=NULL;
     int i,num;
     books *p,*q,*last;
@@ -161,7 +165,7 @@ void books::book_list(books *book_head) //图书借阅排行，我把返回值�
         count++;
         p=p->next;
     }
-    
+
     for(i=0;i<count-1;i++){
         p=tmp->next;
         q=p->next;
@@ -181,11 +185,12 @@ void books::book_list(books *book_head) //图书借阅排行，我把返回值�
     }
     cout<<"图书借阅次数排行榜（前20）："<<'\n';
     p=tmp->next;
-    for(int i=0;i<20;i++)   
+    for(int i=0;i<20;i++)
     {
         cout<<i+1<<" "<<p->isbn<<" "<<p->name<<" "<<p->author<<" "<<p->publishing<<" "<<p->published<<" "<<p->price<<" "<<p->price<<"\n"<<p->description<<'\n';
         p=p->next;
     }
+    system("pause");
     return ;    //函数结束应该会自动释放内存的……吧？
 }
 
@@ -193,6 +198,7 @@ void books::new_publish(books *book_head) //图书最新出版排行
 {
     cout<<"加载中。。。"<<'\n';
     books* tmp=dictionary_list(book_head);  //先按字典序排
+    system("cls");
     int i,count=0,num;
     books *p,*q,*last;
     p=tmp->next;
@@ -202,7 +208,7 @@ void books::new_publish(books *book_head) //图书最新出版排行
         count++;
         p=p->next;
     }
-    
+
     for(i=0;i<count-1;i++){
         p=tmp->next;
         q=p->next;
@@ -222,12 +228,13 @@ void books::new_publish(books *book_head) //图书最新出版排行
     }
     cout<<"图书最新出版排行榜（前20）："<<'\n';
     p=tmp->next;
-    for(int i=0;i<20;i++)   
+    for(int i=0;i<20;i++)
     {
         cout<<i+1<<" "<<p->isbn<<" "<<p->name<<" "<<p->author<<" "<<p->publishing<<" "<<p->published<<" "<<p->price<<" "<<p->price<<"\n"<<p->description<<'\n';
         p=p->next;
     }
-    return ; 
+    system("pause");
+    return ;
 }
 
 struct author{
@@ -285,7 +292,7 @@ void books::author_list(books *book_head)
         count++;
         p=p->next;
     }
-    
+
     for(i=0;i<count-1;i++){
         p=head->next;
         q=p->next;
@@ -293,7 +300,7 @@ void books::author_list(books *book_head)
         for(num=0;num<count-i-1;num++)
         {
             if(p->num>q->num)
-            { 
+            {
                 last->next=q;
                 p->next=q->next;
                 q->next=p;
@@ -305,10 +312,11 @@ void books::author_list(books *book_head)
     }
     cout<<"作者被借阅次数排行榜（前20）："<<'\n';
     p=head->next;
-    for(int i=0;i<20;i++)   
+    for(int i=0;i<20;i++)
     {
         cout<<i+1<<" "<<p->name<<" 被借阅次数："<<p->num<<'\n';
         p=p->next;
     }
-    return ; 
+    system("pause");
+    return ;
 }

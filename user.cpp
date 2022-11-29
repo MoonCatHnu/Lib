@@ -8,14 +8,15 @@ user* user::login(user *user_head) //登陆
     cout<<"请输入账号：";
     string account;
     cin>>account;
-    user *temp=user_head;
-    while(temp->next)
+    user *temp=user_head->next;
+    while(temp->next!=NULL)
     {
-        if(temp->account_num==account)  //匹配账号
+        if(temp->account_num.compare(account)==0)  //匹配账号
         {
             cout<<"请输入密码"<<'\n';
             string key;
-            if(key==temp->key)  //"匹配密码"
+            cin>>key;
+            if(temp->key.compare(key)==0)  //"匹配密码"
             {
                 cout<<"登录成功"<<'\n';
                 return temp;
@@ -23,6 +24,7 @@ user* user::login(user *user_head) //登陆
             else
             {
                 cout<<"密码不正确，登录失败"<<'\n';
+                system("pause");
                 return NULL;
             }
         }
@@ -43,7 +45,7 @@ user* user::login(user *user_head) //登陆
 
 void user::change_key(user *user_head)  //改密码
 {
-    user *temp=user_head;  
+    user *temp=user_head;
     if(!temp)
     {
         return ;
@@ -54,21 +56,23 @@ void user::change_key(user *user_head)  //改密码
 
         in_again:
 
-        cout<<"请输入新密码："<<'\n';
+        cout<<"请输入新密码：";
         cin>>new_key1;
-        cout<<"请再次输入新密码： "<<'\n';
+        cout<<endl<<"请再次输入新密码： ";
         cin>>new_key2;
         //嗯嗯，模仿常规登陆情况
-        if(new_key1==new_key2)
+        if(new_key1.compare(new_key2)==0)
         {
             temp->key=new_key2;
-            cout<<"修改成功！"<<'\n';
+            cout<<endl<<"修改成功！"<<'\n';
             save_users(user_head);
+            system("pause");
             return ;
         }
         else
         {
-            cout<<"两次密码输入不一致，请重新输入"<<'\n';
+            cout<<endl<<"两次密码输入不一致，请重新输入"<<'\n';
+            system("pause");
             goto in_again;  //应该可以用while改(懒)
         }
     }
@@ -77,7 +81,7 @@ void user::change_key(user *user_head)  //改密码
 void user::show_borrow(user *user_head,books *book_head)
 {
     user *temp=user_head;
-    
+
     cout<<"你借过"<<temp->log_num<<"本书"<<'\n';
     cout<<"分别是：";
     for(int i=0;i<log_num;i++)
@@ -92,16 +96,17 @@ void user::show_borrow(user *user_head,books *book_head)
         else
         t=t->next;
     }
-    } 
+    }
+    system("pause");
     return;
 }
 
 void user::b_r(int n,user *user_head,books *book_head)   //这个部分的编写跟目录结构有点关系，等目录出来大概是要改
 {
-    
+
     user *temp=user_head;
     books* tmp;
-    
+
     int i;
     string isbn;
     string bo_name;

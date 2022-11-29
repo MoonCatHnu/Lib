@@ -9,7 +9,7 @@ void reg_admin(admin *admin_head){   //需要更改管理员链表数据，目�
     string key,key_temp;
     int sign;
     while(1){
-        ifs.open("管理员注册密钥.txt",ios::in); //这里路径要改一改
+        ifs.open("注册管理员密钥.txt",ios::in); //这里路径要改一改
         cout<<"请输入管理员注册密钥"<<endl<<"key:";
         cin>>key_temp;
         while(ifs>>key){
@@ -45,12 +45,22 @@ void reg_admin(admin *admin_head){   //需要更改管理员链表数据，目�
     cin>>node->account_num;
     cout<<endl<<"密码：";
     cin>>node->key;
-    cout<<"请等待..."<<endl;
+    cout<<endl<<"是否要保存注册？键入 0-保存 其他数字-取消并返回上级目录：";
+    cin>>sign;
+    if(!sign){
+        cout<<"请等待..."<<endl;
     h->next=node;
     node->next=NULL;
     save_admins(admin_head);
     cout<<"注册成功！"<<endl;
+    system("pause");
     system("cls");
+    return;
+    }
+    else{
+        delete node;
+        return;
+    }
 }
 
 void reg_user(user *user_head)  //突然意识到还有账号重复问题要解决
