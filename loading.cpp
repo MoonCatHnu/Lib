@@ -4,7 +4,7 @@
 using namespace std;
 
 //此文件编写每次程序开始时进行对图书、管理员、用户的数据处理函数，返回值为链表头结点
-struct books* loading_books(int &num){
+books* loading_books(int &num){
     ifstream ifs;
     ifs.open("books.txt",ios::in);
     num=0;
@@ -16,7 +16,7 @@ struct books* loading_books(int &num){
     if(ifs.eof()){
         ifs.close();
     }
-    
+
     else{
         ifs.close();    //重新打开文件；
         ifs.open("books.txt",ios::in); //此处及以下文件路径需要改动
@@ -43,7 +43,7 @@ struct books* loading_books(int &num){
             node->pages=pages;
             node->description=description;
             node->b_num=b_num;
-            node->borrow=false; 
+            node->borrow=false;
             end->next=node;
             end=end->next;
             num++;
@@ -55,7 +55,7 @@ struct books* loading_books(int &num){
     return head;
 }
 
-struct admin* loading_admin(int &num){
+admin* loading_admin(int &num){
     ifstream ifs;
     ifs.open("admin.txt",ios::in);
     num=0;
@@ -67,7 +67,7 @@ struct admin* loading_admin(int &num){
     if(ifs.eof()){
         ifs.close();
     }
-    
+
     else{
         ifs.close();    //重新打开文件；
         ifs.open("admin.txt",ios::in); //此处及以下文件路径需要改动
@@ -88,7 +88,7 @@ struct admin* loading_admin(int &num){
     return head;
 }
 
-struct user* loading_users(int &num,books *head_books){ //用户需要录入借阅记录，更改图书的借阅信息，此处引入图书链表的头指针
+user* loading_users(int &num,books *head_books){ //用户需要录入借阅记录，更改图书的借阅信息，此处引入图书链表的头指针
     ifstream ifs;
     ifs.open("user.txt",ios::in);
     num=0;
@@ -100,15 +100,16 @@ struct user* loading_users(int &num,books *head_books){ //用户需要录入借�
     if(ifs.eof()){
         ifs.close();
     }
-    
+
     else{
         ifs.close();    //重新打开文件；
-        ifs.open("books.txt",ios::in); //此处及以下文件路径需要改动
+        ifs.open("user.txt",ios::in); //此处及以下文件路径需要改动
         string account_num,key;
         int log_num;
         user *end=head;
         while(ifs>>account_num&&ifs>>key&&ifs>>log_num){
             user *node=new user;
+            node->account_num=account_num,node->key=key,node->log_num=log_num;
             if(log_num!=0){
                 for(int i=0;i<log_num;i++){
                     ifs>>node->log[i];

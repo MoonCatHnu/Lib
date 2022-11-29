@@ -42,6 +42,7 @@ int main(){
                         cout<<"您的输入有误，请重试"<<endl;
                         goto reg_menu;
                 }
+                break;
             case 2:     //游客模式
                 menu_tourist:
                 system("cls");
@@ -50,7 +51,7 @@ int main(){
                     case 0:     //返回上级菜单
                     system("cls");
                     break;
-                    case 1: 
+                    case 1:
                     book_menu:    //查找图书
                         i=main.show_menu_books();
                         switch (i){
@@ -85,7 +86,7 @@ int main(){
                             cout<<"您的输入有误，请重试"<<endl;
                             goto book_menu;
                         }
-                        goto menu_tourist;    
+                        goto menu_tourist;
                     case 2:     //查看图书借阅排行榜
                         system("cls");
                         books_head->book_list(books_head);
@@ -103,9 +104,10 @@ int main(){
                         goto menu_tourist;
 
                 }
+                break;
             case 3:     //学生模式
             us_re_lo:
-                cout<<"亲爱的同学，欢迎使用图书馆信息管理系统，请先登录以使用后续功能！"<<endl;    
+                cout<<"亲爱的同学，欢迎使用图书馆信息管理系统，请先登录以使用后续功能！"<<endl;
                 us_tmp=users_head->login(users_head);
                 if(us_tmp==NULL)
                 {
@@ -158,7 +160,7 @@ int main(){
                             cout<<"您的输入有误，请重试"<<endl;
                             goto book_menu2;
                         }
-                        goto menu_user;    
+                        goto menu_user;
                     case 2:     //还书
                         system("cls");
                         if(us_tmp==NULL)
@@ -216,6 +218,7 @@ int main(){
                         cout<<"您的输入有误，请重试"<<endl;
                         goto menu_user;
                 }
+                break;
             case 4:     //管理员模式
 
                 cout<<"亲爱的管理员，欢迎使用图书馆信息管理系统，请先登录以使用后续功能！"<<endl;
@@ -255,6 +258,7 @@ int main(){
                         cout<<"您的输入有误，请重试"<<endl;
                         goto menu_admin;
                 }
+                break;
             default:
                 cout<<"您的输入有误，请重试"<<endl;
                 break;

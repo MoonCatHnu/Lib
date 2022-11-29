@@ -58,33 +58,52 @@ void reg_user(user *user_head)  //突然意识到还有账号重复问题要解�
     system("cls");
     int sign;
     user *h=user_head;
-    while(h->next!=NULL){  
+    while(h->next!=NULL){
         h=h->next;
     }
     user *node=new user,*tmp;
-    tmp=user_head;
     string ac_;
     re_ac:
+    system("cls");
+    tmp=user_head;
     cout<<"欢迎注册！"<<endl<<"账号：";
     cin>>ac_;
-    while (tmp)
+    while (tmp!=NULL)
     {
-        if(tmp->account_num!=ac_)
+        if(tmp->account_num.compare(ac_)!=0)
         {
             tmp=tmp->next;
         }
         else
         {
-            cout<<"账号已被注册，请重新输入！"<<'\n';
-            goto re_ac;
+            cout<<"账号已被注册，请重新输入或退出，键入0-退出 其他数字-重新输入：";
+            cin>>sign;
+            if(sign){
+                goto re_ac;
+            }
+            else{
+                delete node;
+                return;
+            }
         }
     }
     node->account_num=ac_;
     cout<<endl<<"密码：";
     cin>>node->key;
+    node->log_num=0;
     h->next=node;
     node->next=NULL;
-    save_users(user_head);
-    cout<<"注册成功！"<<endl;
-    system("cls");
+    cout<<endl<<"是否要保存注册？键入 0-保存 其他数字-取消并返回上级目录：";
+    cin>>sign;
+    if(!sign){
+        save_users(user_head);
+        cout<<"注册成功！"<<endl;
+        system("pause");
+        system("cls");
+        return;
+    }
+    else{
+        delete node;
+        return;
+    }
 }
