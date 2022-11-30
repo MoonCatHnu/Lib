@@ -74,7 +74,7 @@ void books::lookup_author(string author,books *book_head)
     }
     if(!finding){
     cout<<"未查找到相关书籍，请检查输入是否正确或向管理员反应书籍缺失"<<'\n';
-    system("pause");
+    
     }
     system("pause");
     return ;
@@ -102,7 +102,7 @@ void books::lookup_publishing(string publishing,books *book_head)
     }
     if(!finding){
     cout<<"未查找到相关书籍，请检查输入是否正确或向管理员反应书籍缺失"<<'\n';
-    system("pause");
+    
     }
     system("pause");
     return ;
@@ -189,7 +189,7 @@ void books::book_list(books *book_head) //图书借阅排行，我把返回值�
     p=tmp->next;
     for(int i=0;i<20;i++)
     {
-        cout<<i+1<<" "<<p->isbn<<" "<<p->name<<" "<<p->author<<" "<<p->publishing<<" "<<p->published<<" "<<p->price<<" "<<p->price<<"\n"<<p->description<<'\n';
+        cout<<i+1<<" "<<p->isbn<<" "<<p->name<<" "<<p->author<<" "<<p->publishing<<" "<<p->published<<" "<<p->price<<" "<<p->price<<'\n';
         p=p->next;
     }
     system("pause");
@@ -232,7 +232,7 @@ void books::new_publish(books *book_head) //图书最新出版排行
     p=tmp->next;
     for(int i=0;i<20;i++)
     {
-        cout<<i+1<<" "<<p->isbn<<" "<<p->name<<" "<<p->author<<" "<<p->publishing<<" "<<p->published<<" "<<p->price<<" "<<p->price<<"\n"<<p->description<<'\n';
+        cout<<i+1<<" "<<p->isbn<<" "<<p->name<<" "<<p->author<<" "<<p->publishing<<" "<<p->published<<" "<<p->price<<" "<<p->price<<'\n';
         p=p->next;
     }
     system("pause");
