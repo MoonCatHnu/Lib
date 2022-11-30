@@ -315,12 +315,12 @@ void admin::reset_key(user *users_head){
     in_ag:
     cout<<"请输入要重置的账号：";
     cin>>str;
-    while (users_head)
+    user* tmp=users_head;
+    while (tmp)
     {
-        user* tmp=users_head;
         if(tmp->account_num==str)
         {
-            tmp->key=123456;
+            tmp->key="123456";
             cout<<"重置成功！"<<'\n';
             cout<<"正在保存。。。"<<endl;
             save_users(users_head);
@@ -332,7 +332,7 @@ void admin::reset_key(user *users_head){
         tmp=tmp->next;
     }
 
-    cout<<"没有相应账号的学生0-重新查找 1-退出："<<'\n';
+    cout<<"没有相应账号的学生 0-重新查找 1-退出："<<'\n';
     int i;
     cin>>i;
     if(i)

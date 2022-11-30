@@ -130,6 +130,7 @@ int main(){
                         break;
                     case 1:     //查书
                     book_menu2:    //查找图书
+                        system("cls");
                         i=main.show_menu_books();
                         switch (i){
                         case 0:

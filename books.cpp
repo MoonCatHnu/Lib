@@ -33,7 +33,7 @@ books* books::lookup_name(string name,books *book_head)   //书名精确查找
     {
         if(temp->name.compare(name)==0)
         {
-            cout<<temp->isbn<<" "<<temp->name<<" "<<temp->author<<" "<<temp->publishing<<" "<<temp->published<<" "<<temp->price<<" "<<temp->price<<"\n";
+            cout<<temp->isbn<<" "<<temp->name<<" "<<temp->author<<" "<<temp->publishing<<" "<<temp->published<<" "<<temp->price<<" "<<temp->price<<"\n"<<"详情："<<temp->description<<'\n';
             cout<<"借阅情况： ";
             if(temp->borrow)
             cout<<"本书已被借阅"<<'\n';
@@ -57,7 +57,7 @@ books* books::lookup_isbn(string isbn,books *book_head)   //ISBN精确查找
     {
         if(temp->isbn.compare(isbn)==0)
         {
-            cout<<temp->isbn<<" "<<temp->name<<" "<<temp->author<<" "<<temp->publishing<<" "<<temp->published<<" "<<temp->price<<" "<<temp->price<<"\n";
+            cout<<temp->isbn<<" "<<temp->name<<" "<<temp->author<<" "<<temp->publishing<<" "<<temp->published<<" "<<temp->price<<" "<<temp->price<<"\n"<<"详情："<<temp->description<<'\n';
             cout<<"借阅情况： ";
             if(temp->borrow)
             cout<<"本书已被借阅"<<'\n';
@@ -96,7 +96,7 @@ void books::lookup_author(string author,books *book_head)
     }
     if(!finding){
     cout<<"未查找到相关书籍，请检查输入是否正确或向管理员反应书籍缺失"<<'\n';
-    system("pause");
+    
     }
     system("pause");
     return ;
@@ -124,7 +124,7 @@ void books::lookup_publishing(string publishing,books *book_head)
     }
     if(!finding){
     cout<<"未查找到相关书籍，请检查输入是否正确或向管理员反应书籍缺失"<<'\n';
-    system("pause");
+    
     }
     system("pause");
     return ;
@@ -196,7 +196,7 @@ void books::book_list(books *book_head) //图书借阅排行，我把返回值�
         last=tmp;
         for(num=0;num<count-i-1;num++)
         {
-            if(p->b_num>p->next->b_num)
+            if(p->b_num<p->next->b_num)
             {    //按借阅次数大小排序
                 last->next=q;
                 p->next=q->next;
@@ -323,7 +323,7 @@ void books::author_list(books *book_head)
         last=head;
         for(num=0;num<count-i-1;num++)
         {
-            if(p->num>q->num)
+            if(p->num<q->num)
             {
                 last->next=q;
                 p->next=q->next;

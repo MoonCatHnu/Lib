@@ -84,7 +84,10 @@ void user::show_borrow(user *user_head,books *book_head)
 
     cout<<"你借过"<<temp->log_num<<"本书"<<'\n';
     if(temp->log_num==0)
-    return;
+    {
+        system("pause");
+        return;
+    }
     cout<<"分别是：";
     for(int i=0;i<temp->log_num;i++)
     {
