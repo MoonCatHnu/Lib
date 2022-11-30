@@ -67,6 +67,7 @@ void books::lookup_author(string author,books *book_head)
             cout<<"本书已被借阅"<<'\n';
             else
             cout<<"本书可借阅"<<'\n';
+            temp=temp->next;
         }
         else
         temp=temp->next;
@@ -94,6 +95,7 @@ void books::lookup_publishing(string publishing,books *book_head)
             cout<<"本书已被借阅"<<'\n';
             else
             cout<<"本书可借阅"<<'\n';
+            temp=temp->next;
         }
         else
         temp=temp->next;

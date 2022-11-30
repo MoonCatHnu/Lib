@@ -9,7 +9,7 @@ user* user::login(user *user_head) //登陆
     string account;
     cin>>account;
     user *temp=user_head->next;
-    while(temp->next!=NULL)
+    while(temp!=NULL)
     {
         if(temp->account_num.compare(account)==0)  //匹配账号
         {
@@ -113,12 +113,17 @@ void user::b_r(int n,user *user_head,books *book_head)   //这个部分的编写
     books* book;
 ag:
     cout<<"请查找图书 输入1-按ISBN查找图书 2-按书名查找图书 0-退出"<<'\n';
+    cin>>i;
     switch (i)
     {
     case 1:
+        cout<<"请输入图书的ISBN: ";
+        cin>>isbn;
         book=tmp->lookup_isbn(isbn,book_head);
         break;
     case 2:
+        cout<<"请输入书名: ";
+        cin>>bo_name;
         book=tmp->lookup_name(bo_name,book_head);
     case 0:
         return ;
