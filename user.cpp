@@ -144,6 +144,7 @@ ag:
             temp->log[temp->log_num-1]=book->id;
             cout<<"借阅成功！"<<'\n';
             save_users(user_head);
+            save_books(book_head);
             system("pause");
             return;
         }
@@ -166,6 +167,7 @@ ag:
         {
             book->borrow=true;
             cout<<"归还成功！"<<'\n';
+            save_books(book_head);
             system("pause");
             return;
         }
