@@ -83,15 +83,18 @@ void user::show_borrow(user *user_head,books *book_head)
     user *temp=user_head;
 
     cout<<"你借过"<<temp->log_num<<"本书"<<'\n';
+    if(temp->log_num==0)
+    return;
     cout<<"分别是：";
-    for(int i=0;i<log_num;i++)
+    for(int i=0;i<temp->log_num;i++)
     {
         books *t=book_head;
     while(t->next)
     {
         if(t->id==temp->log[i])
         {
-            cout<<t->isbn<<" "<<t->name<<" "<<t->author<<" "<<t->publishing<<" "<<t->published<<" "<<t->price<<" "<<t->price<<"\n"<<t->description<<'\n';
+            cout<<t->isbn<<" "<<t->name<<" "<<t->author<<" "<<t->publishing<<" "<<t->published<<" "<<t->price<<" "<<t->price<<'\n';
+            t=t->next;
         }
         else
         t=t->next;
@@ -138,18 +141,22 @@ ag:
             book->borrow=true;
             book->b_num+=1;
             temp->log_num+=1;
-            temp->log[log_num-1]=book->id;
+            temp->log[temp->log_num-1]=book->id;
             cout<<"借阅成功！"<<'\n';
+            save_users(user_head);
+            system("pause");
             return;
         }
         else if(temp->log_num>20)
         {
             cout<<"借阅数量不得超过20本"<<'\n';
+            system("pause");
             return;
         }
         else
         {
             cout<<"本书已被借阅"<<'\n';
+            system("pause");
             return;
         }
     }
@@ -159,15 +166,18 @@ ag:
         {
             book->borrow=true;
             cout<<"归还成功！"<<'\n';
+            system("pause");
             return;
         }
         else
         {
             cout<<"本书已归还"<<'\n';
+            system("pause");
             return;
         }
     }
     else
     cout<<"输入错误，请重新输入"<<'\n';
+    system("pause");
     return;
 }
