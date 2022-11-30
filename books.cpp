@@ -29,7 +29,7 @@ return NULL;
 books* books::lookup_name(string name,books *book_head)   //书名精确查找
 {
     books *temp=book_head;
-    while(temp->next)
+    while(temp)
     {
         if(temp->name.compare(name)==0)
         {
@@ -53,7 +53,7 @@ books* books::lookup_name(string name,books *book_head)   //书名精确查找
 books* books::lookup_isbn(string isbn,books *book_head)   //ISBN精确查找
 {
     books *temp=book_head;
-    while(temp->next)
+    while(temp)
     {
         if(temp->isbn.compare(isbn)==0)
         {
@@ -78,7 +78,7 @@ void books::lookup_author(string author,books *book_head)
 {
     books *temp=book_head;
     bool finding=false;
-    while(temp->next)
+    while(temp)
     {
         if(temp->author.compare(author)==0)
         {
@@ -106,7 +106,7 @@ void books::lookup_publishing(string publishing,books *book_head)
 {
     books *temp=book_head;
     bool finding=false;
-    while(temp->next)
+    while(temp)
     {
         if(temp->publishing.compare(publishing)==0)
         {
