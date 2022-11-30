@@ -4,14 +4,36 @@
 #include "hnulib.h"
 using namespace std;
 
+books* books::look_up_id(int id,books *books_head){
+books *temp=books_head->next;
+while(temp!=NULL){
+    if(temp->id==id){
+        cout<<temp->isbn<<" "<<temp->name<<" "<<temp->author<<" "<<temp->publishing<<" "<<temp->published<<" "<<temp->price<<" "<<temp->price<<"\n";
+        cout<<"借阅情况： ";
+        if(temp->borrow)
+            cout<<"本书已被借阅"<<'\n';
+        else
+            cout<<"本书可借阅"<<'\n';
+        system("pause");
+        return temp;
+    }
+    else{
+        temp=temp->next;
+    }
+}
+cout<<"未查找到相关书籍，请检查输入是否正确"<<'\n';
+system("pause");
+return NULL;
+}
+
 books* books::lookup_name(string name,books *book_head)   //书名精确查找
 {
     books *temp=book_head;
     while(temp->next)
     {
-        if(temp->name==name)
+        if(temp->name.compare(name)==0)
         {
-            cout<<temp->isbn<<" "<<temp->name<<" "<<temp->author<<" "<<temp->publishing<<" "<<temp->published<<" "<<temp->price<<" "<<temp->price<<"\n"<<temp->description<<'\n';
+            cout<<temp->isbn<<" "<<temp->name<<" "<<temp->author<<" "<<temp->publishing<<" "<<temp->published<<" "<<temp->price<<" "<<temp->price<<"\n";
             cout<<"借阅情况： ";
             if(temp->borrow)
             cout<<"本书已被借阅"<<'\n';
@@ -33,9 +55,9 @@ books* books::lookup_isbn(string isbn,books *book_head)   //ISBN精确查找
     books *temp=book_head;
     while(temp->next)
     {
-        if(temp->isbn==isbn)
+        if(temp->isbn.compare(isbn)==0)
         {
-            cout<<temp->isbn<<" "<<temp->name<<" "<<temp->author<<" "<<temp->publishing<<" "<<temp->published<<" "<<temp->price<<" "<<temp->price<<"\n"<<temp->description<<'\n';
+            cout<<temp->isbn<<" "<<temp->name<<" "<<temp->author<<" "<<temp->publishing<<" "<<temp->published<<" "<<temp->price<<" "<<temp->price<<"\n";
             cout<<"借阅情况： ";
             if(temp->borrow)
             cout<<"本书已被借阅"<<'\n';
@@ -58,10 +80,10 @@ void books::lookup_author(string author,books *book_head)
     bool finding=false;
     while(temp->next)
     {
-        if(temp->author==author)
+        if(temp->author.compare(author)==0)
         {
             finding=true;
-            cout<<temp->isbn<<" "<<temp->name<<" "<<temp->author<<" "<<temp->publishing<<" "<<temp->published<<" "<<temp->price<<" "<<temp->price<<"\n"<<temp->description<<'\n';
+            cout<<temp->isbn<<" "<<temp->name<<" "<<temp->author<<" "<<temp->publishing<<" "<<temp->published<<" "<<temp->price<<" "<<temp->price<<"\n";
             cout<<"借阅情况： ";
             if(temp->borrow)
             cout<<"本书已被借阅"<<'\n';
@@ -74,7 +96,7 @@ void books::lookup_author(string author,books *book_head)
     }
     if(!finding){
     cout<<"未查找到相关书籍，请检查输入是否正确或向管理员反应书籍缺失"<<'\n';
-    
+    system("pause");
     }
     system("pause");
     return ;
@@ -86,10 +108,10 @@ void books::lookup_publishing(string publishing,books *book_head)
     bool finding=false;
     while(temp->next)
     {
-        if(temp->publishing==publishing)
+        if(temp->publishing.compare(publishing)==0)
         {
             finding=true;
-            cout<<temp->isbn<<" "<<temp->name<<" "<<temp->author<<" "<<temp->publishing<<" "<<temp->published<<" "<<temp->price<<" "<<temp->price<<"\n"<<temp->description<<'\n';
+            cout<<temp->isbn<<" "<<temp->name<<" "<<temp->author<<" "<<temp->publishing<<" "<<temp->published<<" "<<temp->price<<" "<<temp->price<<"\n";
             cout<<"借阅情况： ";
             if(temp->borrow)
             cout<<"本书已被借阅"<<'\n';
@@ -102,7 +124,7 @@ void books::lookup_publishing(string publishing,books *book_head)
     }
     if(!finding){
     cout<<"未查找到相关书籍，请检查输入是否正确或向管理员反应书籍缺失"<<'\n';
-    
+    system("pause");
     }
     system("pause");
     return ;
@@ -189,7 +211,7 @@ void books::book_list(books *book_head) //图书借阅排行，我把返回值�
     p=tmp->next;
     for(int i=0;i<20;i++)
     {
-        cout<<i+1<<" "<<p->isbn<<" "<<p->name<<" "<<p->author<<" "<<p->publishing<<" "<<p->published<<" "<<p->price<<" "<<p->price<<'\n';
+        cout<<i+1<<" "<<p->isbn<<" "<<p->name<<" "<<p->author<<" "<<p->publishing<<" "<<p->published<<" "<<p->price<<" "<<p->price<<"\n";
         p=p->next;
     }
     system("pause");
@@ -232,7 +254,7 @@ void books::new_publish(books *book_head) //图书最新出版排行
     p=tmp->next;
     for(int i=0;i<20;i++)
     {
-        cout<<i+1<<" "<<p->isbn<<" "<<p->name<<" "<<p->author<<" "<<p->publishing<<" "<<p->published<<" "<<p->price<<" "<<p->price<<'\n';
+        cout<<i+1<<" "<<p->isbn<<" "<<p->name<<" "<<p->author<<" "<<p->publishing<<" "<<p->published<<" "<<p->price<<" "<<p->price<<"\n";
         p=p->next;
     }
     system("pause");

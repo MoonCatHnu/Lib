@@ -21,6 +21,7 @@ friend admin;
 friend menu;
 public:
     bool borrow;    //该图书是否被借阅
+    books* look_up_id(int id,books *books_head);    //id查找图书
     books* lookup_name(string name,books *book_head);  //书名查找图书
     books* lookup_isbn(string isbn,books *book_head);  //isbn查找图书
     void lookup_author(string author,books *book_head);  //作者查找图书
@@ -46,7 +47,7 @@ protected:
 };
 
 class user{ //读者（用户）
-friend void save_users(user *user_head); 
+friend void save_users(user *user_head);
 friend struct user* loading_users(int &num,books *head_books);
 friend void reg_user(user *user_head);
 friend admin;

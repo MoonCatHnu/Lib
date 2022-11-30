@@ -5,6 +5,15 @@
 using namespace std;
 
 void admin::add_book(books *books_head){    //暂时设计成放到队尾
+    books *tmp=books_head->next;
+    int max=-1;
+    while(tmp!=NULL){   //获取最大id号
+        if(tmp->id>max){
+            max=tmp->id;
+        }
+        tmp=tmp->next;
+    }
+    max+=1;
     books *h=books_head;
     while(h->next!=NULL){
         h=h->next;
@@ -13,23 +22,23 @@ void admin::add_book(books *books_head){    //暂时设计成放到队尾
     start:
     system("cls");
     cout<<"请输入图书名：";
-    cin>>h->name;
+    cin>>node->name;
     cout<<endl<<"请输入图书isbn号：";
-    cin>>h->isbn;
+    cin>>node->isbn;
     cout<<endl<<"请输入图书作者名：";
-    cin>>h->author;
+    cin>>node->author;
     cout<<endl<<"请输入图书出版社：";
-    cin>>h->published;
+    cin>>node->published;
     cout<<endl<<"请输入图书发行时间：";
-    cin>>h->publishing;
+    cin>>node->publishing;
     cout<<endl<<"请输入图书价格：";
-    cin>>h->price;
+    cin>>node->price;
     cout<<endl<<"请输入图书页数：";
-    cin>>h->pages;
+    cin>>node->pages;
     cout<<endl<<"请输入图书描述（回车停止输入）：";
-    cin>>h->description;
+    cin>>node->description;
     cout<<endl<<"请输入已被借阅次数：";
-    cin>>h->b_num;
+    cin>>node->b_num;
     last_step:
     system("cls");
     cout<<"确定保存？输入0以确认，输入1以重新输入，输入2以取消增加图书操作：";
@@ -50,7 +59,8 @@ void admin::add_book(books *books_head){    //暂时设计成放到队尾
     h->next=node;
     node->next=NULL;
     cout<<"正在保存。。。"<<endl;
-    h->borrow=false;
+    node->borrow=false;
+    node->id=max;
     save_books(books_head);
     cout<<"保存成功！"<<endl;
     system("pause");
@@ -70,16 +80,33 @@ void admin::change_book(books *books_head){
             cout<<"请输入id：";
             cin>>t;
             cout<<endl;
-                            //接口暂时还没实现
-            break;
+            temp=books_head->look_up_id(t,books_head);
+            if(temp=NULL){
+                goto start;
+            }
+            else{
+                break;
+            }
         case 2:
             cout<<"请输入isbn：";
             cin>>T;
             temp=books_head->lookup_isbn(T,books_head);
+            if(temp=NULL){
+                goto start;
+            }
+            else{
+                break;
+            }
         case 3:
             cout<<"请输入书名：";
             cin>>T;
             temp=books_head->lookup_name(T,books_head);
+            if(temp=NULL){
+                goto start;
+            }
+            else{
+                break;
+            }
         default:
             cout<<"输入有误！请检查并重新输入"<<endl;
             system("pause");
@@ -231,7 +258,11 @@ void admin::del_book(books *books_head){
     cin>>i;
     switch(i){
         case 1:
-                        //暂时没有接口
+             cout<<endl<<"请输入id：";
+             int t;
+             cin>>t;
+             temp=books_head->look_up_id(t,books_head);
+             break;
         case 2:
             cout<<endl<<"请输入isbn码：";
             cin>>T;
@@ -322,13 +353,13 @@ admin* admin::login(admin *admins_head){
     cin>>key;
     admin *tmp=admins_head->next;
     while(tmp!=NULL){
-        if(tmp->account_num==amount){
+        if(tmp->account_num.compare(amount)==0){
             sign=1;
             break;
         }
         tmp=tmp->next;
     }
-    if(sign){
+    if(!sign){
         cout<<"账号或密码错误，请重试或返回上级菜单，键入并回车："<<endl<<"0-重新输入 1-返回上级菜单：";
         cin>>sign;
         if(sign){
@@ -339,7 +370,7 @@ admin* admin::login(admin *admins_head){
         }
     }
     else{
-        if(tmp->key==key){
+        if(tmp->key.compare(key)==0){
             cout<<"登陆成功！"<<endl;
             system("pause");
             system("cls");
