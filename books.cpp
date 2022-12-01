@@ -28,7 +28,7 @@ return NULL;
 
 books* books::lookup_name(string name,books *book_head)   //书名精确查找
 {
-    books *temp=book_head;
+    books *temp=book_head->next;
     while(temp)
     {
         if(temp->name.compare(name)==0)
@@ -96,7 +96,7 @@ void books::lookup_author(string author,books *book_head)
     }
     if(!finding){
     cout<<"未查找到相关书籍，请检查输入是否正确或向管理员反应书籍缺失"<<'\n';
-    
+
     }
     system("pause");
     return ;
@@ -124,7 +124,7 @@ void books::lookup_publishing(string publishing,books *book_head)
     }
     if(!finding){
     cout<<"未查找到相关书籍，请检查输入是否正确或向管理员反应书籍缺失"<<'\n';
-    
+
     }
     system("pause");
     return ;

@@ -190,7 +190,7 @@ int main(){
                             cout<<"请先登录"<<endl;
                             goto us_re_lo;
                         }
-                        users_head->change_key(us_tmp);
+                        users_head->change_key(users_head,us_tmp);
                         goto menu_user;
                     case 5:     //查看借阅记录
                         system("cls");

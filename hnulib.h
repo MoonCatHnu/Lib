@@ -54,7 +54,7 @@ friend admin;
 friend menu;
 public:
     user* login(user *user_head);   //登陆
-    void change_key(user *user_head);  //更改密码
+    void change_key(user *user_head,user *user_temp);  //更改密码
     void show_borrow(user *user_head,books *); //查看借阅记录
     void b_r(int,user *user_head,books *); //借阅或归还图书
 protected:

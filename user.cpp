@@ -13,9 +13,10 @@ user* user::login(user *user_head) //登陆
     {
         if(temp->account_num.compare(account)==0)  //匹配账号
         {
-            cout<<"请输入密码"<<'\n';
+            cout<<"请输入密码：";
             string key;
             cin>>key;
+            cout<<endl;
             if(temp->key.compare(key)==0)  //"匹配密码"
             {
                 cout<<"登录成功"<<'\n';
@@ -43,10 +44,9 @@ user* user::login(user *user_head) //登陆
 //感觉实现前一个没那么麻烦(虽然用户用起来很麻烦)
 //等等，好像可以不用每次都登陆
 
-void user::change_key(user *user_head)  //改密码
+void user::change_key(user *user_head,user *user_temp)  //改密码
 {
-    user *temp=user_head;
-    if(!temp)
+    if(!user_temp)
     {
         return ;
     }
@@ -63,7 +63,7 @@ void user::change_key(user *user_head)  //改密码
         //嗯嗯，模仿常规登陆情况
         if(new_key1.compare(new_key2)==0)
         {
-            temp->key=new_key2;
+            user_temp->key=new_key2;
             cout<<endl<<"修改成功！"<<'\n';
             save_users(user_head);
             system("pause");
