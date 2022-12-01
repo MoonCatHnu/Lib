@@ -20,6 +20,7 @@ user* user::login(user *user_head) //登陆
             if(temp->key.compare(key)==0)  //"匹配密码"
             {
                 cout<<"登录成功"<<'\n';
+                system("pause");
                 return temp;
             }
             else
@@ -37,6 +38,7 @@ user* user::login(user *user_head) //登陆
     }
 
     cout<<"账号不存在，请先注册或检查拼写是否正确"<<'\n';
+    system("pause");
     return NULL;
 
 }
@@ -92,7 +94,7 @@ void user::show_borrow(user *user_head,books *book_head)
     for(int i=0;i<temp->log_num;i++)
     {
         books *t=book_head;
-    while(t->next)
+    while(t)
     {
         if(t->id==temp->log[i])
         {
@@ -107,10 +109,10 @@ void user::show_borrow(user *user_head,books *book_head)
     return;
 }
 
-void user::b_r(int n,user *user_head,books *book_head)   //这个部分的编写跟目录结构有点关系，等目录出来大概是要改
+void user::b_r(int n,user *user_head,books *book_head,user *user_temp)   //这个部分的编写跟目录结构有点关系，等目录出来大概是要改
 {
 
-    user *temp=user_head;
+    user *temp=user_temp;
     books* tmp;
 
     int i;
@@ -131,6 +133,7 @@ ag:
         cout<<"请输入书名: ";
         cin>>bo_name;
         book=tmp->lookup_name(bo_name,book_head);
+        break;
     case 0:
         return ;
     default:

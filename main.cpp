@@ -172,7 +172,7 @@ int main(){
                             cout<<"请先登录"<<endl;
                             goto us_re_lo;
                         }
-                        users_head->b_r(2,us_tmp,books_head);
+                        users_head->b_r(2,users_head,books_head,us_tmp);
                         goto menu_user;
                     case 3:     //借书
                         system("cls");
@@ -181,7 +181,7 @@ int main(){
                             cout<<"请先登录"<<endl;
                             goto us_re_lo;
                         }
-                        users_head->b_r(1,us_tmp,books_head);
+                        users_head->b_r(1,users_head,books_head,us_tmp);
                         goto menu_user;
                     case 4:
                         system("cls");
