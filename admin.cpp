@@ -360,7 +360,7 @@ admin* admin::login(admin *admins_head){
         tmp=tmp->next;
     }
     if(!sign){
-        cout<<"账号或密码错误，请重试或返回上级菜单，键入并回车："<<endl<<"0-重新输入 1-返回上级菜单：";
+        cout<<"账号或密码错误，请重试或返回上级菜单，键入并回车："<<endl<<"0-重新输入 其他数字-返回上级菜单：";
         cin>>sign;
         if(sign){
             return NULL;
@@ -377,7 +377,7 @@ admin* admin::login(admin *admins_head){
             return tmp;
         }
         else{
-            cout<<"账号或密码错误，请重试或返回上级菜单，键入并回车："<<endl<<"0-重新输入 1-返回上级菜单：";
+            cout<<"账号或密码错误，请重试或返回上级菜单，键入并回车："<<endl<<"0-重新输入 其他数字-返回上级菜单：";
             cin>>sign;
             if(sign){
             return NULL;
@@ -387,4 +387,293 @@ admin* admin::login(admin *admins_head){
             }
         }
     }
+}
+
+void admin::add_user(user *user_head,books *books_head){
+    start:
+    system("cls");
+    string amount,key;
+    int log;
+    int i,j;
+    cout<<"请输入学生账号：";
+    cin>>amount;
+    cout<<endl<<"请输入密码：";
+    cin>>key;
+    cout<<endl<<"请输入该用户的借阅数目：";
+    cin>>log;
+    int log_id[log];
+    if(log<0||log>20){
+        cout<<"请输入大等于0小等于20的数目！"<<endl;
+    }
+    else if(log>0&&log<=20){
+        cout<<"请依次输入数目id" <<endl;
+        for(j=0;j<log;j++){
+            step:
+            system("cls");
+            cout<<"请输入第"<<j+1<<"个书的<有效>id:";
+            cin>>log_id[j];
+            books *books_temp=books_head->next;
+            int sign=0;
+            while(books_temp!=NULL){
+                if(books_temp->id==log_id[j]){
+                    sign=1;
+                    break;
+                }
+            }
+            if(!sign){
+                cout<<"不存在此id！请重新输入或退出 0-重新输入 其他数字-退出"<<endl;
+                cin>>sign;
+                if(sign){
+                    return;
+                }
+                else{
+                    goto step;
+                }
+            }
+            cout<<endl;
+        }
+    }
+    last_step:
+    system("cls");
+    cout<<endl<<"确认保存？ 键入并回车：0-保存 1-重新输入 2-退出   ";
+    cin>>i;
+    switch(i){
+        case 0:
+            break;
+        case 1:
+            goto start;
+        case 2:
+            return;
+        default:
+            cout<<"键入错误！请重试"<<endl;
+            goto last_step;
+    }
+    cout<<endl<<"正在处理..."<<endl;
+    user *user_temp=user_head->next;
+    while(user_temp->next!=NULL){
+        user_temp=user_temp->next;
+    }
+    user *node=new user;
+    node->account_num=amount;
+    node->key=key;
+    node->log_num=log;
+    for(j=0;j<log;j++){
+        node->log[j]=log_id[j];
+    }
+    user_temp->next=node;
+    node->next=NULL;
+    save_users(user_head);
+    cout<<"保存成功！"<<endl;
+    system("pause");
+    system("cls");
+    return;
+}
+
+void admin::del_user(user *users_head){
+    start:
+    system("cls");
+    string amount;
+    int sign=0;
+    cout<<"请输入要删除的学生账号：";
+    cin>>amount;
+    user *user_temp=users_head->next;
+    while(user_temp->next!=NULL){
+        if(user_temp->next->account_num.compare(amount)==0){
+            sign=1;
+            break;
+        }
+    }
+    if(!sign){
+        cout<<"没有该学生！键入并回车 0-重新输入 其他数字-退出：";
+        cin>>sign;
+        if(sign){
+            return;
+        }
+        else{
+            goto start;
+        }
+    }
+    cout<<endl<<"确认删除？ 键入并回车 0-确认 其他数字-取消并退出 ：";
+    cin>>sign;
+    if(sign){
+        return;
+    }
+    else{
+        user *temp=user_temp->next;
+        user_temp->next=temp->next;
+        temp->next=NULL;
+        delete temp;
+        save_users(users_head);
+    }
+    cout<<endl<<"保存成功！"<<endl;
+    system("pause");
+    system("cls");
+    return;
+}
+
+void admin::change_user(user *user_head,books *books_head){
+    start:
+    system("cls");
+    string amount;
+    int sign=0;
+    cout<<"请输入要更改的学生账号：";
+    cin>>amount;
+    user *user_temp=user_head->next;
+    while(user_temp!=NULL){
+        if(user_temp->account_num.compare(amount)==0){
+            sign=1;
+            break;
+        }
+    }
+    if(!sign){
+        cout<<"没有该学生！键入并回车 0-重新输入 其他数字-退出：";
+        cin>>sign;
+        if(sign){
+            return;
+        }
+        else{
+            goto start;
+        }
+    }
+    cout<<"键入并回车选择需要更改的信息编号"
+        <<endl<<"1-账号："<<user_temp->account_num
+        <<endl<<"2-密码："<<user_temp->key
+        <<endl<<"3-借阅书数目"<<user_temp->log_num;
+        if(user_temp->log_num!=0){
+            sign=1;
+            cout<<endl<<"4-借阅书编号：";
+            for(int i=0;i<user_temp->log_num;i++){
+                cout<<user_temp->log[i]<<' ';
+            }
+            cout<<endl;
+        }
+        int sign1;
+        cin>>sign1;
+        if(sign1==1){
+            cout<<"请输入新账号：";
+            string amount1;
+            cin>>amount1;
+            cout<<endl<<"是否保存修改？ 键入并回车 0-保存 其他数字-取消并退出：";
+            cin>>sign;
+            if(sign){
+                return;
+            }
+            else{
+                user_temp->account_num=amount1;
+            }
+        }
+        else if(sign1==2){
+            cout<<"请输入新密码：";
+            string key;
+            cin>>key;
+            cout<<endl<<"是否保存修改？ 键入并回车 0-保存 其他数字-取消并退出：";
+            cin>>sign;
+            if(sign){
+                return;
+            }
+            else{
+                user_temp->key=key;
+            }
+        }
+        else if(sign1==3){
+            system("cls");
+            step1:
+            cout<<"请输入新借阅书数目：";
+            int log_num;
+            cin>>log_num;
+            if(log_num>user_temp->log_num&&log_num<=20){
+                for(int i=user_temp->log_num;i<log_num;i++){
+                    step:
+                    cout<<"请输入第"<<i-log_num+1<<"个新增书的id：";
+                    int id;
+                    cin>>id;
+                    books *books_temp=books_head->next;
+                    int sign=0;
+                    while(books_temp!=NULL){
+                        if(books_temp->id==id){
+                        sign=1;
+                        break;
+                        }
+                    }
+                    if(!sign){
+                        cout<<"不存在此id！请重新输入或退出 0-重新输入 其他数字-退出"<<endl;
+                        cin>>sign;
+                        if(sign){
+                            return;
+                        }
+                        else{
+                            goto step;
+                        }
+                    }
+                    user_temp->log[i]=id;
+                    cout<<endl;
+                }
+            }
+            else if(log_num>20||log_num<0){
+                cout<<"请输入大等于0小等于20的数目！"<<endl;
+                goto step1;
+            }
+            cout<<endl<<"是否保存修改？ 键入并回车 0-保存 其他数字-取消并退出：";
+            cin>>sign;
+            if(sign){
+                return;
+            }
+            else{
+                user_temp->log_num=log_num;
+            }
+        }
+        else if(sign1==4&&sign==1){
+            int log_id[user_temp->log_num];
+            for(int j=0;j<user_temp->log_num;j++){
+                step2:
+                system("cls");
+                cout<<"请输入第"<<j+1<<"个书的<有效>id:";
+                cin>>log_id[j];
+                books *books_temp=books_head->next;
+                int sign=0;
+                while(books_temp!=NULL){
+                    if(books_temp->id==log_id[j]){
+                        sign=1;
+                        break;
+                    }
+                }
+                if(!sign){
+                    cout<<"不存在此id！请重新输入或退出 0-重新输入 其他数字-退出"<<endl;
+                    cin>>sign;
+                    if(sign){
+                        return;
+                    }
+                    else{
+                        goto step2;
+                    }
+                }
+                cout<<endl;
+            }
+            cout<<endl<<"是否保存修改？ 键入并回车 0-保存 其他数字-取消并退出：";
+            cin>>sign;
+            if(sign){
+                return;
+            }
+            else{
+                for(int i=0;i<user_temp->log_num;i++){
+                    user_temp->log[i]=log_id[i];
+                }
+            }
+        }
+        else{
+            cout<<endl<<"输入错误！键入并回车 0-重新输入 其他数字-退出：";
+            cin>>sign;
+            if(sign){
+                return;
+            }
+            else{
+                goto start;
+            }
+        }
+        cout<<"正在保存....."<<endl;
+        save_users(user_head);
+        cout<<"保存成功！"<<endl;
+        system("pause");
+        system("cls");
+        return;
 }

@@ -75,6 +75,9 @@ public:
     void add_book(books *books_head);    //增加图书
     void del_book(books *books_head);    //删除图书
     void change_book(books *books_head);    //更改图书信息
+    void add_user(user *user_head,books *books_head); //增加用户
+    void del_user(user *user_head); //删除用户
+    void change_user(user *user_head,books *books_head);  //更改账号信息（账号、密码、借阅记录）
     void reset_key(user *users_head);   //重置学生密码
 protected:
     string account_num;
