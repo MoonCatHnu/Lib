@@ -677,3 +677,37 @@ void admin::change_user(user *user_head,books *books_head){
         system("cls");
         return;
 }
+
+void admin::lookup_user(user *users_head)   //查找学生
+{
+    string str;
+    in_again:
+    cout<<"请输入要重置的账号：";
+    cin>>str;
+    user* tmp=users_head;
+    while (tmp)
+    {
+        if(tmp->account_num==str)
+        {
+            cout<<tmp->account_num<<" "<<tmp->key<<" "<<tmp->log_num<<'\n';
+            cout<<"借阅书目的id：";
+            for(int i=0;i<tmp->log_num;i++)
+            {
+                cout<<tmp->log[i]<<" ";
+            }
+            cout<<'\n';
+            system("pause");
+            return ;
+        }
+        else
+        tmp=tmp->next;
+    }
+
+    cout<<"没有相应账号的学生 0-重新查找 1-退出："<<'\n';
+    int i;
+    cin>>i;
+    if(i)
+    return;
+    else
+    goto in_again;
+}

@@ -57,6 +57,7 @@ public:
     void change_key(user *user_head,user *user_temp);  //更改密码
     void show_borrow(user *user_head,books *); //查看借阅记录
     void b_r(int,user *user_head,books *,user *user_temp); //借阅或归还图书
+    void user_list(user *user_head);
 protected:
     string account_num;   //账号
     string key;   //密码
@@ -75,6 +76,7 @@ public:
     void add_book(books *books_head);    //增加图书
     void del_book(books *books_head);    //删除图书
     void change_book(books *books_head);    //更改图书信息
+    void lookup_user(user *user_head);  //查找用户
     void add_user(user *user_head,books *books_head); //增加用户
     void del_user(user *user_head); //删除用户
     void change_user(user *user_head,books *books_head);  //更改账号信息（账号、密码、借阅记录）

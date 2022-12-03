@@ -189,3 +189,49 @@ ag:
     system("pause");
     return;
 }
+
+void user::user_list(user *user_head)
+{
+    int i,num,count=0;
+    user* tmp=user_head;
+    user *p,*q,*last;
+
+    p=tmp->next;
+
+    while (p->next!=NULL)
+    {
+        count++;
+        p=p->next;
+    }
+
+    for(i=0;i<count-1;i++){
+        p=tmp->next;
+        q=p->next;
+        last=tmp;
+        for(num=0;num<count-i-1;num++)
+        {
+            if(p->log_num<p->next->log_num)
+            {    //按出版时间排序
+                last->next=q;
+                p->next=q->next;
+                q->next=p;
+            }
+            last=last->next;
+            p=last->next;
+            q=p->next;
+        }
+    }
+
+    cout<<"读者借阅排行榜"<<'\n';
+    p=tmp->next;
+    for(int i=0;i<20;i++)
+    {
+        cout<<i+1<<" "<<p->account_num<<" "<<p->log_num<<"\n";
+        p=p->next;
+        if(p=NULL)
+        break;
+    }
+    system("pause");
+    return ;
+
+}

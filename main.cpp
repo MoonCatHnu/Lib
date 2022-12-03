@@ -96,7 +96,11 @@ int main(){
                         system("cls");
                         books_head->author_list(books_head);
                         goto menu_tourist;
-                    case 4:     //查看最新出版书籍
+                    case 4:     //查看读者借阅排行榜
+                        system("cls");
+                        users_head->user_list(users_head);
+                        goto menu_tourist;
+                    case 5:     //查看最新出版书籍
                         system("cls");
                         books_head->new_publish(books_head);
                         goto menu_tourist;
@@ -209,11 +213,15 @@ int main(){
                         system("cls");
                         books_head->author_list(books_head);
                         goto menu_user;
-                    case 8:     //出版时间排行榜
+                    case 8:     //查看读者借阅排行榜
+                        system("cls");
+                        users_head->user_list(users_head);
+                        goto menu_user;
+                    case 9:     //出版时间排行榜
                         system("cls");
                         books_head->new_publish(books_head);
                         goto menu_user;
-                    case 9:
+                    case 10:
                         system("cls");
                         us_tmp=NULL;
                         cout<<"您已退出登录"<<endl;
@@ -249,14 +257,31 @@ int main(){
                         system("cls");
                         admins_head->change_book(books_head);
                         goto menu_admin;
-                    case 4:     //重置学生密码
+                    case 4:     //查找学生
+                        system("cls");
+                        admins_head->lookup_user(users_head);
+                        goto menu_admin;
+                    case 5:     //追加学生
+                        system("cls");
+                        admins_head->add_user(users_head,books_head);
+                        goto menu_admin;
+                    case 6:     //删除学生
+                        system("cls");
+                        admins_head->del_user(users_head);
+                        goto menu_admin;
+                    case 7:     //更改学生
+                        system("cls");
+                        admins_head->change_user(users_head,books_head);
+                        goto menu_admin;
+                    case 8:     //重置学生密码
                         system("cls");
                         admins_head->reset_key(users_head);
                         goto menu_admin;
-                    case 5:
+                    case 9:
                         system("cls");
                         ad_tmp=NULL;
                         cout<<"您已退出登录"<<endl;
+                        system("pause");
                         break;
                     default:
                         cout<<"您的输入有误，请重试"<<endl;
