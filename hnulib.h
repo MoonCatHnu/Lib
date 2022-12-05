@@ -1,5 +1,5 @@
 # ifndef _HNULIB_H
-# define _HUNLIB_H
+# define _HNULIB_H
 
 #include <iostream>
 #include <fstream>

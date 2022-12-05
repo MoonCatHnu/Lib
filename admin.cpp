@@ -117,7 +117,9 @@ void admin::change_book(books *books_head){
 			string T;
 			last_step:
 				system("cls");
-				cout<<temp->id<<" "<<temp->isbn<<" "<<temp->name<<" "<<temp->author<<" "<<temp->publishing<<" "<<temp->published<<" "<<temp->price<<" "<<temp->pages<<" "<<temp->b_num<<endl<<"\n"<<temp->description<<'\n';
+				cout<<"id: "<<temp->id<<'\n'<<"ISBN编号: "<<temp->isbn<<'\n'<<"书名: "<<temp->name<<'\n'<<"作者: "<<temp->author<<'\n'<<"出版社: "
+				<<temp->publishing<<'\n'<<"出版时间: "<<temp->published<<'\n'<<"价格: "<<temp->price<<'\n'<<"页码: "<<temp->pages<<'\n'<<"被借阅次数: "
+				<<temp->b_num<<endl<<"描述: "<<temp->description<<'\n';
 				cout<<"请选择要修改的图书信息，输入1以更改isbn，输入2以更改书名，输入3以更改作者，输入4以更改出版社名称"<<endl
 				<<"输入5以更改出版时间，输入6以更改价格，输入7以更改页数，输入8以更改描述，输入9以更改被借阅次数，输入'0'以退出：";
 				cin>>i;
@@ -169,7 +171,7 @@ void admin::change_book(books *books_head){
 						goto last_step;
 					}
 					else{
-						temp->published=T;
+						temp->publishing=T;
 					}
 					break;
 				case 5:
@@ -181,7 +183,7 @@ void admin::change_book(books *books_head){
 						goto last_step;
 					}
 					else{
-						temp->publishing=T;
+						temp->published=T;
 					}
 					break;
 				case 6:
@@ -419,6 +421,7 @@ void admin::add_user(user *user_head,books *books_head){
 							sign=1;
 							break;
 						}
+						books_temp=books_temp->next;
 					}
 					if(!sign){
 						cout<<"不存在此id！请重新输入或退出 0-重新输入 其他数字-退出"<<endl;
@@ -482,6 +485,7 @@ void admin::del_user(user *users_head){
 				sign=1;
 				break;
 			}
+			user_temp=user_temp->next;
 		}
 		if(!sign){
 			cout<<"没有该学生！键入并回车 0-重新输入 其他数字-退出：";
@@ -527,6 +531,7 @@ void admin::change_user(user *user_head,books *books_head){
 				sign=1;
 				break;
 			}
+			user_temp=user_temp->next;
 		}
 		if(!sign){
 			cout<<"没有该学生！键入并回车 0-重新输入 其他数字-退出：";
@@ -598,6 +603,7 @@ void admin::change_user(user *user_head,books *books_head){
 									sign=1;
 									break;
 								}
+								books_temp=books_temp->next;
 							}
 							if(!sign){
 								cout<<"不存在此id！请重新输入或退出 0-重新输入 其他数字-退出"<<endl;
@@ -640,6 +646,7 @@ void admin::change_user(user *user_head,books *books_head){
 							sign=1;
 							break;
 						}
+						books_temp=books_temp->next;
 					}
 					if(!sign){
 						cout<<"不存在此id！请重新输入或退出 0-重新输入 其他数字-退出"<<endl;
@@ -693,7 +700,7 @@ void admin::lookup_user(user *users_head)   //查找学生
 		{
 			if(tmp->account_num==str)
 			{
-				cout<<tmp->account_num<<" "<<tmp->key<<" "<<tmp->log_num<<'\n';
+				cout<<"账号: "<<tmp->account_num<<"密码: "<<tmp->key<<"借阅次数: "<<tmp->log_num<<'\n';
 				cout<<"借阅书目的id：";
 				for(int i=0;i<tmp->log_num;i++)
 				{

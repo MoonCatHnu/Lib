@@ -1,5 +1,6 @@
 #include<iostream>
 #include "hnulib.h"
+#include<iomanip>
 using namespace std;
 
 user* user::login(user *user_head) //登陆
@@ -211,7 +212,7 @@ void user::user_list(user *user_head)
 		for(num=0;num<count-i-1;num++)
 		{
 			if(p->log_num<p->next->log_num)
-			{    //按出版时间排序
+			{    
 				last->next=q;
 				p->next=q->next;
 				q->next=p;
@@ -226,7 +227,7 @@ void user::user_list(user *user_head)
 	p=tmp->next;
 	for(int i=0;i<20;i++)
 	{
-		cout<<i+1<<" "<<p->account_num<<" "<<p->log_num<<"\n";
+		cout<<setw(3)<<left<<i+1<<"账号名称: "<<setw(15)<<left<<p->account_num<<"借阅次数: "<<p->log_num<<"\n";
 		p=p->next;
 		if(p==NULL)
 			break;
